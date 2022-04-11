@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% block title %}
+  Edit Profile
+{% endblock %}
+{% block content %}
+{% if user %}
+
+    {% if user.is_authenticated %}
+        {% if user.id == userprofile.user.id %}
+            <h1>Edit Profile</h1>
+            <br><br>
+            <div class="form-group">
+                <form method="POST" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    {{form.as_p}}
+                    <button class="btn btn-secondary">Update Profile</button>
+                </form>
+            </div>
+        {% else %}
+            Please log in with your id
+        {% endif %}
+
+    {% else %}
+        You are not Logged in....... Log In first!
+    {% endif %}
+{% endif %}
+{% endblock %}

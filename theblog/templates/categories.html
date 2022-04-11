@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% block title %}
+  Categories
+{% endblock %}
+{% block content %}
+
+{% if user.is_authenticated %}
+    {% if category %}
+    <h1>{{ name }} Blogs </h1>
+
+        {% for post in category %}
+            <ul>
+                <li>
+                    <a href="{% url 'article-detail' post.pk %}">{{ post.title }}</a>
+                    - {{ post.author.first_name }} {{ post.author.last_name }} -
+                    {{ post.post_date }}
+                    <small>
+                        {% if user.is_authenticated %}
+                            - <a href="{% url 'update_post' post.pk %}">(Edit)</a>
+                            <a href="{% url 'delete_post' post.pk %}">(Delete)</a>
+                        {% endif %}
+
+                    </small><br>
+                    {{ post.body|slice:"0:200"| safe }}
+                </li>
+            </ul>
+        {% endfor %}
+    {% else %}
+        Page not Found
+    {% endif %}
+{% else %}
+    You're not logged in..... Log in First. To log in <a href="{% url 'login' %}">Click Here</a>
+{% endif %}
+
+{% endblock %}
