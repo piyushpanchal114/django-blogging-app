@@ -9,6 +9,7 @@ django-ckeditor = "*"
 pillow = "*"
 django-on-heroku = "*"
 gunicorn = "*"
+pipfreeze = "*"
 
 [dev-packages]
 
